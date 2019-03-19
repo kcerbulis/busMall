@@ -29,3 +29,8 @@ img{
   width: 240px;
   height: 350px;
 }
+.tableContainer{
+  width: 500px;
+  height: 400px;
+  margin-left: 32%;
+}

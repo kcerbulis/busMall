@@ -1,4 +1,4 @@
- 'use strics';
+'use strict';
 /*
  Gives the user 25 clicks
  Create a constructor function for the images
@@ -6,7 +6,7 @@
 
 */
 
-
+// calcul
 
 
 // ==========================================================
@@ -17,7 +17,7 @@ var allImages = [];
 // Counts the number of clicks the user has made on the images
 var numberOfClicks = 0;
 // Amount of choices the user is allowed
-var numberOfGivenClicks = 25;
+var numberOfGivenClicks = 40;
 // Gives images a global reference
 var leftImageSelector = document.getElementById('left_image_id')
 var middleImageSelector = document.getElementById('middle_image_id')
@@ -28,6 +28,19 @@ var middleImageOnThePage;
 var rightImageOnThePage;
 
 
+var productPercentageArray = [];
+
+
+var imageOnThePage;
+
+// Set globas to keet their value between each click in order for them to not remeat
+var leftImageIndex;
+var middleImageIndex;
+var rightImageIndex;
+
+var leftImageIndexBefore;
+var middleImageIndexBefore;
+var rightImageIndexBefore;
 
 
 // ==========================================================
@@ -41,6 +54,7 @@ var Product = function(url, name){
   this.imageName = name;
 
   this.clicks = 0;
+  this.shown = 0;
   this.usedBefore = false;
 
   allImages.push(this);
@@ -67,6 +81,26 @@ var rightProductImage = document.getElementById('right');
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ==========================================================================================
+// ---------------------------Left Image Handler Prototype----------------------------------
+// ==========================================================================================
+
+
 function handleClickOnLeftImage(event){
   console.log('You clicked on the left image')
   numberOfClicks++
@@ -75,14 +109,51 @@ function handleClickOnLeftImage(event){
   leftImageOnThePage.clicks++;
 
 
-// Picks 3 new images
+
+// Picks a new image index for the left side
   var leftImageIndex = Math.floor( Math.random() * allImages.length);
+// If the picture index is the same as the previous one, choose a different number
+    while (leftImageIndex === leftImageIndexBefore){
+      leftImageIndex = Math.floor( Math.random() * allImages.length);
+    }
+
+// Picks a new image index for the middle side
   var middleImageIndex = Math.floor( Math.random() * allImages.length);
+// If the picture index is the same as the previous one, choose a different number
+    while (middleImageIndex === middleImageIndexBefore){
+      middleImageIndex = Math.floor( Math.random() * allImages.length);
+    }
+
+
+// Picks a new image index for the right side
   var rightImageIndex = Math.floor( Math.random() * allImages.length);
+    while (rightImageIndex === rightImageIndexBefore){
+      rightImageIndex = Math.floor( Math.random() * allImages.length);
+    }
+
+
 
   leftImageOnThePage = allImages[leftImageIndex];
   middleImageOnThePage = allImages[middleImageIndex];
   rightImageOnThePage = allImages[rightImageIndex];
+
+
+// Prevents the random image to repeat in the same frame
+
+
+
+
+
+
+
+
+
+
+// Incrieces the amount of times shown counter by one
+  leftImageOnThePage.shown++
+  middleImageOnThePage.shown++
+  rightImageOnThePage.shown++
+
 
 // Puts them on the page
   leftImageSelector.src = leftImageOnThePage.imageUrl;
@@ -96,9 +167,37 @@ function handleClickOnLeftImage(event){
     leftProductImage.removeEventListener('click', handleClickOnLeftImage)
     middleProductImage.removeEventListener('click', handleClickOnMiddleImage)
     rightProductImage.removeEventListener('click', handleClickOnRightImage)
+    runTable();
   }
 
+ leftImageIndexBefore = leftImageIndex;
+ middleImageIndexBefore = middleImageIndex;
+ rightImageIndexBefore = rightImageIndex;
+
 }
+
+// ==========================================================================================
+// -----------------------------------------------------------------------------------------
+// ==========================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -113,14 +212,39 @@ function handleClickOnMiddleImage(event){
   middleImageOnThePage.clicks++;
 
 
-// Picks 3 new images
-  var leftImageIndex = Math.floor( Math.random() * allImages.length);
-  var middleImageIndex = Math.floor( Math.random() * allImages.length);
-  var rightImageIndex = Math.floor( Math.random() * allImages.length);
+
+  // Picks a new image index for the left side
+    var leftImageIndex = Math.floor( Math.random() * allImages.length);
+  // If the picture index is the same as the previous one, choose a different number
+      while (leftImageIndex === leftImageIndexBefore){
+        leftImageIndex = Math.floor( Math.random() * allImages.length);
+      }
+
+  // Picks a new image index for the middle side
+    var middleImageIndex = Math.floor( Math.random() * allImages.length);
+  // If the picture index is the same as the previous one, choose a different number
+      while (middleImageIndex === middleImageIndexBefore){
+        middleImageIndex = Math.floor( Math.random() * allImages.length);
+      }
+
+
+  // Picks a new image index for the right side
+    var rightImageIndex = Math.floor( Math.random() * allImages.length);
+      while (rightImageIndex === rightImageIndexBefore){
+        rightImageIndex = Math.floor( Math.random() * allImages.length);
+      }
+
 
   leftImageOnThePage = allImages[leftImageIndex];
   middleImageOnThePage = allImages[middleImageIndex];
   rightImageOnThePage = allImages[rightImageIndex];
+
+
+// Incrieces the amount of times shown counter by one
+  leftImageOnThePage.shown++
+  middleImageOnThePage.shown++
+  rightImageOnThePage.shown++
+
 
 // Puts them on the page
   leftImageSelector.src = leftImageOnThePage.imageUrl;
@@ -134,7 +258,13 @@ function handleClickOnMiddleImage(event){
     leftProductImage.removeEventListener('click', handleClickOnLeftImage)
     middleProductImage.removeEventListener('click', handleClickOnMiddleImage)
     rightProductImage.removeEventListener('click', handleClickOnRightImage)
+    runTable();
   }
+
+  leftImageIndexBefore = leftImageIndex;
+  middleImageIndexBefore = middleImageIndex;
+  rightImageIndexBefore = rightImageIndex;
+
 }
 
 
@@ -147,14 +277,39 @@ function handleClickOnRightImage(event){
   rightImageOnThePage.clicks++;
 
 
-// Picks 3 new images
-  var leftImageIndex = Math.floor( Math.random() * allImages.length);
-  var middleImageIndex = Math.floor( Math.random() * allImages.length);
-  var rightImageIndex = Math.floor( Math.random() * allImages.length);
+
+  // Picks a new image index for the left side
+    var leftImageIndex = Math.floor( Math.random() * allImages.length);
+  // If the picture index is the same as the previous one, choose a different number
+      while (leftImageIndex === leftImageIndexBefore){
+        leftImageIndex = Math.floor( Math.random() * allImages.length);
+      }
+
+  // Picks a new image index for the middle side
+    var middleImageIndex = Math.floor( Math.random() * allImages.length);
+  // If the picture index is the same as the previous one, choose a different number
+      while (middleImageIndex === middleImageIndexBefore){
+        middleImageIndex = Math.floor( Math.random() * allImages.length);
+      }
+
+
+  // Picks a new image index for the right side
+    var rightImageIndex = Math.floor( Math.random() * allImages.length);
+      while (rightImageIndex === rightImageIndexBefore){
+        rightImageIndex = Math.floor( Math.random() * allImages.length);
+      }
+
 
   leftImageOnThePage = allImages[leftImageIndex];
   middleImageOnThePage = allImages[middleImageIndex];
   rightImageOnThePage = allImages[rightImageIndex];
+
+// Incrieces the amount of times shown counter by one
+  leftImageOnThePage.shown++
+  middleImageOnThePage.shown++
+  rightImageOnThePage.shown++
+
+
 
 // Puts them on the page
   leftImageSelector.src = leftImageOnThePage.imageUrl;
@@ -168,7 +323,13 @@ function handleClickOnRightImage(event){
     leftProductImage.removeEventListener('click', handleClickOnLeftImage)
     middleProductImage.removeEventListener('click', handleClickOnMiddleImage)
     rightProductImage.removeEventListener('click', handleClickOnRightImage)
+    runTable();
   }
+
+  leftImageIndexBefore = leftImageIndex;
+  middleImageIndexBefore = middleImageIndex;
+  rightImageIndexBefore = rightImageIndex;
+
 }
 
 
@@ -210,7 +371,106 @@ new Product ('./assets/water-can.jpg', 'watering can');
 new Product ('./assets/wine-glass.jpg', 'wine glass');
 
 
+
 // When the page gets loaded, these are the first images that the user will see
 leftImageOnThePage = allImages[0];
 middleImageOnThePage = allImages[1];
 rightImageOnThePage = allImages[2];
+
+
+
+
+
+// ==========================================================
+//                 ChartJS Implementations
+// ==========================================================
+
+
+
+
+
+
+
+// Calculates Product Poppularity Percentage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function runTable(){
+
+
+
+
+  for (var i = 0; i < allImages.length; i++){
+    var singleProductScore = allImages[i].clicks;
+    var singleProductShown = allImages[i].shown;
+    var singleProductPercentage = (singleProductScore/singleProductShown) * 100;
+    if (singleProductShown === 0){
+      singleProductPercentage = 0;
+    }
+    productPercentageArray.push(Math.floor(singleProductPercentage));
+  }
+
+
+
+
+  var productNamesArray = [];
+
+  for (var i = 0; i < allImages.length; i++){
+    var singleProductName = allImages[i].imageName;
+    productNamesArray.push(singleProductName);
+  }
+
+
+
+  var ctx = document.getElementById('busMallChart').getContext('2d');
+  var busMallChart = new Chart(ctx, {
+      // The type of chart we want to create
+      type: 'bar',
+
+      // The data for our dataset
+      data: {
+          labels: productNamesArray,
+          datasets: [{
+              label: 'Product Poppularity %',
+              backgroundColor: 'rgb(255, 99, 132)',
+              borderColor: 'rgb(255, 99, 132)',
+              data: productPercentageArray
+          }]
+      },
+
+      // Configuration options go here
+      options: {
+                scales: {
+            yAxes: [{
+                ticks: {
+                    max: 100,
+                    min: 0,
+                    stepSize: 5
+                }
+            }]
+        }
+      }
+  });
+
+
+
+
+
+
+
+
+
+
+
+}
