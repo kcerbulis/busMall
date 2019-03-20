@@ -1,12 +1,4 @@
 'use strict';
-/*
- Gives the user 25 clicks
- Create a constructor function for the images
- ---takes the parameters: url, used before: (True/False), times shown, time clicked
-
-*/
-
-// calcul
 
 
 // ==========================================================
@@ -14,47 +6,29 @@
 // ==========================================================
 // An array that will hold all picture objects (Don't know why yet)
 var allImages = [];
+var productPercentageArray = [];
 // Counts the number of clicks the user has made on the images
 var numberOfClicks = 0;
 // Amount of choices the user is allowed
 var numberOfGivenClicks = 40;
+var numberOfSelections = 3;
 // Gives images a global reference
 var leftImageSelector = document.getElementById('left_image_id')
 var middleImageSelector = document.getElementById('middle_image_id')
 var rightImageSelector = document.getElementById('right_image_id')
-
-
-var numberOfSelections = 3;
-
-
 var leftImageOnThePage;
 var middleImageOnThePage;
 var rightImageOnThePage;
-
-
-var productPercentageArray = [];
-
-
 var imageOnThePage;
-
-
-
-
-
-
-
-
-
-
-
-// Set globas to keet their value between each click in order for them to not remeat
 var leftImageIndex;
 var middleImageIndex;
 var rightImageIndex;
-
 var leftImageIndexBefore;
 var middleImageIndexBefore;
 var rightImageIndexBefore;
+
+
+
 
 
 // ==========================================================
@@ -66,15 +40,11 @@ var rightImageIndexBefore;
 var Product = function(url, name){
   this.imageUrl = url;
   this.imageName = name;
-
   this.clicks = 0;
   this.shown = 0;
   this.usedBefore = false;
-
   allImages.push(this);
 }
-
-
 
 
 // ==========================================================================================
@@ -91,60 +61,8 @@ var rightProductImage = document.getElementById('right');
 
 
 
-
-
-
-
-
-
-
-
-
-
-// ==========================================================================================
-// ---------------------------Left Image Handler Prototype----------------------------------
-// ==========================================================================================
-
-
 function handleClickOnAnyImage(event){
   numberOfClicks++
-
-
-
-// ---------------------------------Test Code------------------------------------------
-
-// for (var i = 0; i < numberOfSelections; i++){
-//   var imageIndex = Math.floor( Math.random() * allImages.length);
-//
-//   while (imageIndex === imageIndexBefore){
-//     leftImageIndex = Math.floor( Math.random() * allImages.length);
-//   }
-// }
-
-// --------------------------------------------------------------------------------
-
-//
-// // Picks a new image index for the left side
-//   var leftImageIndex = Math.floor( Math.random() * allImages.length);
-//     while (leftImageIndex === leftImageIndexBefore){
-//       leftImageIndex = Math.floor( Math.random() * allImages.length);
-//     }
-//
-//
-// // Picks a new image index for the middle side
-//   var middleImageIndex = Math.floor( Math.random() * allImages.length);
-//     while (middleImageIndex === middleImageIndexBefore){
-//       middleImageIndex = Math.floor( Math.random() * allImages.length);
-//     }
-//
-//
-// // Picks a new image index for the right side
-//   var rightImageIndex = Math.floor( Math.random() * allImages.length);
-//     while (rightImageIndex === rightImageIndexBefore){
-//       rightImageIndex = Math.floor( Math.random() * allImages.length);
-//     }
-
-
 
 
 
@@ -171,23 +89,9 @@ function handleClickOnAnyImage(event){
 
 
 
-
-
-
-
-
-
   leftImageOnThePage = allImages[leftImageIndex];
   middleImageOnThePage = allImages[middleImageIndex];
   rightImageOnThePage = allImages[rightImageIndex];
-
-
-
-
-
-
-
-
 
 
 
@@ -259,7 +163,6 @@ rightProductImage.addEventListener('click', handleClickOnRightImage);
 // ==========================================================
 //                  Initiates Product Images
 // ==========================================================
-// debugger;
 
 
 
@@ -311,26 +214,6 @@ rightImageOnThePage = allImages[2];
 // ==========================================================
 //                 ChartJS Implementations
 // ==========================================================
-
-
-
-
-
-
-
-// Calculates Product Poppularity Percentage
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function runTable(){
