@@ -17,7 +17,7 @@ var allImages = [];
 // Counts the number of clicks the user has made on the images
 var numberOfClicks = 0;
 // Amount of choices the user is allowed
-var numberOfGivenClicks =15;
+var numberOfGivenClicks = 10;
 // Gives images a global reference
 var leftImageSelector = document.getElementById('left_image_id')
 var middleImageSelector = document.getElementById('middle_image_id')
@@ -36,8 +36,7 @@ var imageOnThePage;
 
 
 
-var allStringyImages = localStorage.getItem('allImages');
-allImages = JSON.parse(allStringyImages);
+
 
 
 
@@ -171,8 +170,9 @@ function handleClickOnAnyImage(event){
     runTable();
 
 // Save the goat data
-    var allStringyImages = JSON.stringify(allImages);
-    localStorage.setItem('allImages', allStringyImages);
+  console.log('Saving goats on local storage');
+  var allStringyImages = JSON.stringify(allImages);
+  localStorage.setItem('allImages', allStringyImages);
   }
 
 
@@ -266,6 +266,10 @@ function handleClickOnMiddleImage(event){
     middleProductImage.removeEventListener('click', handleClickOnMiddleImage)
     rightProductImage.removeEventListener('click', handleClickOnRightImage)
     runTable();
+
+    console.log('Saving goats on local storage');
+    var allStringyImages = JSON.stringify(allImages);
+    localStorage.setItem('allImages', allStringyImages);
   }
 
   leftImageIndexBefore = leftImageIndex;
@@ -331,6 +335,10 @@ function handleClickOnRightImage(event){
     middleProductImage.removeEventListener('click', handleClickOnMiddleImage)
     rightProductImage.removeEventListener('click', handleClickOnRightImage)
     runTable();
+
+    console.log('Saving goats on local storage');
+    var allStringyImages = JSON.stringify(allImages);
+    localStorage.setItem('allImages', allStringyImages);
   }
 
   leftImageIndexBefore = leftImageIndex;
@@ -363,27 +371,43 @@ rightProductImage.addEventListener('click', handleClickOnRightImage);
 // ==========================================================
 //                  Initiates Product Images
 // ==========================================================
+// debugger;
 
-new Product ('./assets/bag.jpg', 'r2d2 bag');
-new Product ('./assets/banana.jpg', 'banana cutter');
-new Product ('./assets/bathroom.jpg', 'ipad holder');
-new Product ('./assets/boots.jpg', 'ugly boots');
-new Product ('./assets/breakfast.jpg', 'breakfast machine');
-new Product ('./assets/bubblegum.jpg', 'discusting gum');
-new Product ('./assets/chair.jpg', 'wierd chair');
-new Product ('./assets/cthulhu.jpg', 'cthulhu');
-new Product ('./assets/dog-duck.jpg', 'dog duck-mouth');
-new Product ('./assets/dragon.jpg', 'dragon');
-new Product ('./assets/pen.jpg', 'pen');
-new Product ('./assets/pet-sweep.jpg', 'pet sweeping shoes');
-new Product ('./assets/scissors.jpg', 'pizza scisors');
-new Product ('./assets/shark.jpg', 'shark');
-new Product ('./assets/sweep.png', 'sweep');
-new Product ('./assets/tauntaun.jpg', 'kid in a sleeping bag');
-new Product ('./assets/unicorn.jpg', 'unicorm meat');
-new Product ('./assets/usb.gif', 'freeky usb');
-new Product ('./assets/water-can.jpg', 'watering can');
-new Product ('./assets/wine-glass.jpg', 'wine glass');
+
+
+if(localStorage.getItem('allImages') === null){
+
+  console.log('Creating new goats')
+  new Product ('./assets/bag.jpg', 'r2d2 bag');
+  new Product ('./assets/banana.jpg', 'banana cutter');
+  new Product ('./assets/bathroom.jpg', 'ipad holder');
+  new Product ('./assets/boots.jpg', 'ugly boots');
+  new Product ('./assets/breakfast.jpg', 'breakfast machine');
+  new Product ('./assets/bubblegum.jpg', 'discusting gum');
+  new Product ('./assets/chair.jpg', 'wierd chair');
+  new Product ('./assets/cthulhu.jpg', 'cthulhu');
+  new Product ('./assets/dog-duck.jpg', 'dog duck-mouth');
+  new Product ('./assets/dragon.jpg', 'dragon');
+  new Product ('./assets/pen.jpg', 'pen');
+  new Product ('./assets/pet-sweep.jpg', 'pet sweeping shoes');
+  new Product ('./assets/scissors.jpg', 'pizza scisors');
+  new Product ('./assets/shark.jpg', 'shark');
+  new Product ('./assets/sweep.png', 'sweep');
+  new Product ('./assets/tauntaun.jpg', 'kid in a sleeping bag');
+  new Product ('./assets/unicorn.jpg', 'unicorm meat');
+  new Product ('./assets/usb.gif', 'freeky usb');
+  new Product ('./assets/water-can.jpg', 'watering can');
+  new Product ('./assets/wine-glass.jpg', 'wine glass');
+}
+  else {
+    console.log('Getting products from local storage');
+    var allStringyImages = localStorage.getItem('allImages');
+    allImages = JSON.parse(allStringyImages);
+  }
+
+
+
+
 
 
 
