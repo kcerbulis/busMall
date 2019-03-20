@@ -17,11 +17,15 @@ var allImages = [];
 // Counts the number of clicks the user has made on the images
 var numberOfClicks = 0;
 // Amount of choices the user is allowed
-var numberOfGivenClicks = 10;
+var numberOfGivenClicks = 40;
 // Gives images a global reference
 var leftImageSelector = document.getElementById('left_image_id')
 var middleImageSelector = document.getElementById('middle_image_id')
 var rightImageSelector = document.getElementById('right_image_id')
+
+
+var numberOfSelections = 3;
+
 
 var leftImageOnThePage;
 var middleImageOnThePage;
@@ -103,34 +107,73 @@ var rightProductImage = document.getElementById('right');
 
 
 function handleClickOnAnyImage(event){
-  console.log('You clicked on the left image')
   numberOfClicks++
 
 
-  leftImageOnThePage.clicks++;
+
+// ---------------------------------Test Code------------------------------------------
+
+// for (var i = 0; i < numberOfSelections; i++){
+//   var imageIndex = Math.floor( Math.random() * allImages.length);
+//
+//   while (imageIndex === imageIndexBefore){
+//     leftImageIndex = Math.floor( Math.random() * allImages.length);
+//   }
+// }
+
+// --------------------------------------------------------------------------------
+
+//
+// // Picks a new image index for the left side
+//   var leftImageIndex = Math.floor( Math.random() * allImages.length);
+//     while (leftImageIndex === leftImageIndexBefore){
+//       leftImageIndex = Math.floor( Math.random() * allImages.length);
+//     }
+//
+//
+// // Picks a new image index for the middle side
+//   var middleImageIndex = Math.floor( Math.random() * allImages.length);
+//     while (middleImageIndex === middleImageIndexBefore){
+//       middleImageIndex = Math.floor( Math.random() * allImages.length);
+//     }
+//
+//
+// // Picks a new image index for the right side
+//   var rightImageIndex = Math.floor( Math.random() * allImages.length);
+//     while (rightImageIndex === rightImageIndexBefore){
+//       rightImageIndex = Math.floor( Math.random() * allImages.length);
+//     }
+
+
 
 
 
 // Picks a new image index for the left side
   var leftImageIndex = Math.floor( Math.random() * allImages.length);
-// If the picture index is the same as the previous one, choose a different number
-    while (leftImageIndex === leftImageIndexBefore){
-      leftImageIndex = Math.floor( Math.random() * allImages.length);
-    }
 
 // Picks a new image index for the middle side
   var middleImageIndex = Math.floor( Math.random() * allImages.length);
-// If the picture index is the same as the previous one, choose a different number
-    while (middleImageIndex === middleImageIndexBefore){
-      middleImageIndex = Math.floor( Math.random() * allImages.length);
-    }
-
 
 // Picks a new image index for the right side
   var rightImageIndex = Math.floor( Math.random() * allImages.length);
-    while (rightImageIndex === rightImageIndexBefore){
-      rightImageIndex = Math.floor( Math.random() * allImages.length);
-    }
+
+
+
+  while (leftImageIndex === leftImageIndexBefore || leftImageIndex === middleImageIndex || leftImageIndex === rightImageIndex){
+    leftImageIndex = Math.floor( Math.random() * allImages.length);
+  }
+  while (middleImageIndex === middleImageIndexBefore || middleImageIndex === leftImageIndex || middleImageIndex === rightImageIndex){
+    middleImageIndex = Math.floor( Math.random() * allImages.length);
+  }
+  while (rightImageIndex === rightImageIndexBefore || rightImageIndex === leftImageIndex || rightImageIndex === middleImageIndex){
+    rightImageIndex = Math.floor( Math.random() * allImages.length);
+  }
+
+
+
+
+
+
 
 
 
@@ -155,11 +198,10 @@ function handleClickOnAnyImage(event){
   rightImageOnThePage.shown++
 
 
-// Puts them on the page
+// Puts the images on the page
   leftImageSelector.src = leftImageOnThePage.imageUrl;
   middleImageSelector.src = middleImageOnThePage.imageUrl;
   rightImageSelector.src = rightImageOnThePage.imageUrl;
-
 
 // Stop after you run out of clicks
   if (numberOfClicks >= numberOfGivenClicks){
@@ -174,194 +216,40 @@ function handleClickOnAnyImage(event){
   var allStringyImages = JSON.stringify(allImages);
   localStorage.setItem('allImages', allStringyImages);
   }
-
-
-
  leftImageIndexBefore = leftImageIndex;
  middleImageIndexBefore = middleImageIndex;
  rightImageIndexBefore = rightImageIndex;
 
 }
 
-// ==========================================================================================
-// -----------------------------------------------------------------------------------------
-// ==========================================================================================
 
 
 
 
+function handleClickOnLeftImage(){
+  console.log('User clicked on the left image')
+  leftImageOnThePage.clicks++;
+  handleClickOnAnyImage();
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function handleClickOnMiddleImage(event){
-  console.log('You clicked on the middle image')
-  numberOfClicks++
-
-
-  middleImageOnThePage.clicks++;
-
-
-
-  // Picks a new image index for the left side
-    var leftImageIndex = Math.floor( Math.random() * allImages.length);
-  // If the picture index is the same as the previous one, choose a different number
-      while (leftImageIndex === leftImageIndexBefore){
-        leftImageIndex = Math.floor( Math.random() * allImages.length);
-      }
-
-  // Picks a new image index for the middle side
-    var middleImageIndex = Math.floor( Math.random() * allImages.length);
-  // If the picture index is the same as the previous one, choose a different number
-      while (middleImageIndex === middleImageIndexBefore){
-        middleImageIndex = Math.floor( Math.random() * allImages.length);
-      }
-
-
-  // Picks a new image index for the right side
-    var rightImageIndex = Math.floor( Math.random() * allImages.length);
-      while (rightImageIndex === rightImageIndexBefore){
-        rightImageIndex = Math.floor( Math.random() * allImages.length);
-      }
-
-
-  leftImageOnThePage = allImages[leftImageIndex];
-  middleImageOnThePage = allImages[middleImageIndex];
-  rightImageOnThePage = allImages[rightImageIndex];
-
-
-// Incrieces the amount of times shown counter by one
-  leftImageOnThePage.shown++
-  middleImageOnThePage.shown++
-  rightImageOnThePage.shown++
-
-
-// Puts them on the page
-  leftImageSelector.src = leftImageOnThePage.imageUrl;
-  middleImageSelector.src = middleImageOnThePage.imageUrl;
-  rightImageSelector.src = rightImageOnThePage.imageUrl;
-
-
-// Stop after you run out of clicks
-  if (numberOfClicks >= numberOfGivenClicks){
-    console.log('The user ran out of clicks')
-    leftProductImage.removeEventListener('click', handleClickOnAnyImage)
-    middleProductImage.removeEventListener('click', handleClickOnMiddleImage)
-    rightProductImage.removeEventListener('click', handleClickOnRightImage)
-    runTable();
-
-    console.log('Saving goats on local storage');
-    var allStringyImages = JSON.stringify(allImages);
-    localStorage.setItem('allImages', allStringyImages);
-  }
-
-  leftImageIndexBefore = leftImageIndex;
-  middleImageIndexBefore = middleImageIndex;
-  rightImageIndexBefore = rightImageIndex;
-
+function handleClickOnMiddleImage(){
+  console.log('User clicked on the middle image')
+  middleImageOnThePage.clicks++
+  handleClickOnAnyImage();
 }
 
 
-
-function handleClickOnRightImage(event){
-  console.log('You clicked on the right image')
-  numberOfClicks++
-
-
+function handleClickOnRightImage(){
+  console.log('User clicked on the right image')
   rightImageOnThePage.clicks++;
-
-
-
-  // Picks a new image index for the left side
-    var leftImageIndex = Math.floor( Math.random() * allImages.length);
-  // If the picture index is the same as the previous one, choose a different number
-      while (leftImageIndex === leftImageIndexBefore){
-        leftImageIndex = Math.floor( Math.random() * allImages.length);
-      }
-
-  // Picks a new image index for the middle side
-    var middleImageIndex = Math.floor( Math.random() * allImages.length);
-  // If the picture index is the same as the previous one, choose a different number
-      while (middleImageIndex === middleImageIndexBefore){
-        middleImageIndex = Math.floor( Math.random() * allImages.length);
-      }
-
-
-  // Picks a new image index for the right side
-    var rightImageIndex = Math.floor( Math.random() * allImages.length);
-      while (rightImageIndex === rightImageIndexBefore){
-        rightImageIndex = Math.floor( Math.random() * allImages.length);
-      }
-
-
-  leftImageOnThePage = allImages[leftImageIndex];
-  middleImageOnThePage = allImages[middleImageIndex];
-  rightImageOnThePage = allImages[rightImageIndex];
-
-// Incrieces the amount of times shown counter by one
-  leftImageOnThePage.shown++
-  middleImageOnThePage.shown++
-  rightImageOnThePage.shown++
-
-
-
-// Puts them on the page
-  leftImageSelector.src = leftImageOnThePage.imageUrl;
-  middleImageSelector.src = middleImageOnThePage.imageUrl;
-  rightImageSelector.src = rightImageOnThePage.imageUrl;
-
-
-// Stop after you run out of clicks
-  if (numberOfClicks >= numberOfGivenClicks){
-    console.log('The user ran out of clicks')
-    leftProductImage.removeEventListener('click', handleClickOnAnyImage)
-    middleProductImage.removeEventListener('click', handleClickOnMiddleImage)
-    rightProductImage.removeEventListener('click', handleClickOnRightImage)
-    runTable();
-
-    console.log('Saving goats on local storage');
-    var allStringyImages = JSON.stringify(allImages);
-    localStorage.setItem('allImages', allStringyImages);
-  }
-
-  leftImageIndexBefore = leftImageIndex;
-  middleImageIndexBefore = middleImageIndex;
-  rightImageIndexBefore = rightImageIndex;
-
+  handleClickOnAnyImage();
 }
 
 
 
-//
-//
-//
 // Adds an event listeners that listens for clicks
 // Executes the handler function once there is a click
-//
-// leftProductImage.addEventListener('click', handleClickOnAnyImage);
-// middleProductImage.addEventListener('click', handleClickOnMiddleImage);
-// rightProductImage.addEventListener('click', handleClickOnRightImage);
-
-
-
-leftProductImage.addEventListener('click', handleClickOnAnyImage);
+leftProductImage.addEventListener('click', handleClickOnLeftImage);
 middleProductImage.addEventListener('click', handleClickOnMiddleImage);
 rightProductImage.addEventListener('click', handleClickOnRightImage);
 
@@ -502,15 +390,4 @@ function runTable(){
         }
       }
   });
-
-
-
-
-
-
-
-
-
-
-
 }
