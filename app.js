@@ -17,7 +17,7 @@ var allImages = [];
 // Counts the number of clicks the user has made on the images
 var numberOfClicks = 0;
 // Amount of choices the user is allowed
-var numberOfGivenClicks = 40;
+var numberOfGivenClicks = 25;
 // Gives images a global reference
 var leftImageSelector = document.getElementById('left_image_id')
 var middleImageSelector = document.getElementById('middle_image_id')
@@ -408,8 +408,9 @@ rightImageOnThePage = allImages[2];
 
 function runTable(){
 
-
-
+  document.getElementById("idid").style.visibility = "hidden";
+  document.getElementById("table").style.visibility = "hidden";
+  document.getElementById("busMallChart").style.display = "block";
 
   for (var i = 0; i < allImages.length; i++){
     var singleProductScore = allImages[i].clicks;
