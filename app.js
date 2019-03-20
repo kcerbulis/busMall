@@ -17,7 +17,7 @@ var allImages = [];
 // Counts the number of clicks the user has made on the images
 var numberOfClicks = 0;
 // Amount of choices the user is allowed
-var numberOfGivenClicks = 25;
+var numberOfGivenClicks =15;
 // Gives images a global reference
 var leftImageSelector = document.getElementById('left_image_id')
 var middleImageSelector = document.getElementById('middle_image_id')
@@ -32,6 +32,17 @@ var productPercentageArray = [];
 
 
 var imageOnThePage;
+
+
+
+
+var allStringyImages = localStorage.getItem('allImages');
+allImages = JSON.parse(allStringyImages);
+
+
+
+
+
 
 // Set globas to keet their value between each click in order for them to not remeat
 var leftImageIndex;
@@ -87,21 +98,12 @@ var rightProductImage = document.getElementById('right');
 
 
 
-
-
-
-
-
-
-
-
-
 // ==========================================================================================
 // ---------------------------Left Image Handler Prototype----------------------------------
 // ==========================================================================================
 
 
-function handleClickOnLeftImage(event){
+function handleClickOnAnyImage(event){
   console.log('You clicked on the left image')
   numberOfClicks++
 
@@ -138,7 +140,6 @@ function handleClickOnLeftImage(event){
   rightImageOnThePage = allImages[rightImageIndex];
 
 
-// Prevents the random image to repeat in the same frame
 
 
 
@@ -164,11 +165,17 @@ function handleClickOnLeftImage(event){
 // Stop after you run out of clicks
   if (numberOfClicks >= numberOfGivenClicks){
     console.log('The user ran out of clicks')
-    leftProductImage.removeEventListener('click', handleClickOnLeftImage)
-    middleProductImage.removeEventListener('click', handleClickOnMiddleImage)
-    rightProductImage.removeEventListener('click', handleClickOnRightImage)
+    leftProductImage.removeEventListener('click', handleClickOnAnyImage)
+    middleProductImage.removeEventListener('click', handleClickOnAnyImage)
+    rightProductImage.removeEventListener('click', handleClickOnAnyImage)
     runTable();
+
+// Save the goat data
+    var allStringyImages = JSON.stringify(allImages);
+    localStorage.setItem('allImages', allStringyImages);
   }
+
+
 
  leftImageIndexBefore = leftImageIndex;
  middleImageIndexBefore = middleImageIndex;
@@ -255,7 +262,7 @@ function handleClickOnMiddleImage(event){
 // Stop after you run out of clicks
   if (numberOfClicks >= numberOfGivenClicks){
     console.log('The user ran out of clicks')
-    leftProductImage.removeEventListener('click', handleClickOnLeftImage)
+    leftProductImage.removeEventListener('click', handleClickOnAnyImage)
     middleProductImage.removeEventListener('click', handleClickOnMiddleImage)
     rightProductImage.removeEventListener('click', handleClickOnRightImage)
     runTable();
@@ -320,7 +327,7 @@ function handleClickOnRightImage(event){
 // Stop after you run out of clicks
   if (numberOfClicks >= numberOfGivenClicks){
     console.log('The user ran out of clicks')
-    leftProductImage.removeEventListener('click', handleClickOnLeftImage)
+    leftProductImage.removeEventListener('click', handleClickOnAnyImage)
     middleProductImage.removeEventListener('click', handleClickOnMiddleImage)
     rightProductImage.removeEventListener('click', handleClickOnRightImage)
     runTable();
@@ -334,14 +341,22 @@ function handleClickOnRightImage(event){
 
 
 
-
-
-
+//
+//
+//
 // Adds an event listeners that listens for clicks
 // Executes the handler function once there is a click
-leftProductImage.addEventListener('click', handleClickOnLeftImage);
+//
+// leftProductImage.addEventListener('click', handleClickOnAnyImage);
+// middleProductImage.addEventListener('click', handleClickOnMiddleImage);
+// rightProductImage.addEventListener('click', handleClickOnRightImage);
+
+
+
+leftProductImage.addEventListener('click', handleClickOnAnyImage);
 middleProductImage.addEventListener('click', handleClickOnMiddleImage);
 rightProductImage.addEventListener('click', handleClickOnRightImage);
+
 
 
 
