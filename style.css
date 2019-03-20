@@ -34,3 +34,11 @@ img{
   height: 400px;
   margin-left: 32%;
 }
+#busMallChart{
+  margin-top: -28%;
+  margin-bottom: 145px;
+  position: fixed;
+}
+canvas{
+  display: none;
+}
