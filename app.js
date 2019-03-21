@@ -10,7 +10,7 @@ var productPercentageArray = [];
 // Counts the number of clicks the user has made on the images
 var numberOfClicks = 0;
 // Amount of choices the user is allowed
-var numberOfGivenClicks = 40;
+var numberOfGivenClicks = 25;
 var numberOfSelections = 3;
 // Gives images a global reference
 var leftImageSelector = document.getElementById('left_image_id')
@@ -77,13 +77,29 @@ function handleClickOnAnyImage(event){
 
 
 
-  while (leftImageIndex === leftImageIndexBefore || leftImageIndex === middleImageIndex || leftImageIndex === rightImageIndex){
+  while (leftImageIndex === leftImageIndexBefore
+      || leftImageIndex === middleImageIndexBefore
+      || leftImageIndex === rightImageIndexBefore
+      || leftImageIndex === middleImageIndex
+      || leftImageIndex === rightImageIndex){
     leftImageIndex = Math.floor( Math.random() * allImages.length);
   }
-  while (middleImageIndex === middleImageIndexBefore || middleImageIndex === leftImageIndex || middleImageIndex === rightImageIndex){
+
+
+  while (middleImageIndex === middleImageIndexBefore
+      || middleImageIndex === leftImageIndexBefore
+      || middleImageIndex === rightImageIndexBefore
+      || middleImageIndex === leftImageIndex
+      || middleImageIndex === rightImageIndex){
     middleImageIndex = Math.floor( Math.random() * allImages.length);
   }
-  while (rightImageIndex === rightImageIndexBefore || rightImageIndex === leftImageIndex || rightImageIndex === middleImageIndex){
+
+
+  while (rightImageIndex === rightImageIndexBefore
+      || rightImageIndex === leftImageIndexBefore
+      || rightImageIndex === middleImageIndexBefore
+      || rightImageIndex === leftImageIndex
+      || rightImageIndex === middleImageIndex){
     rightImageIndex = Math.floor( Math.random() * allImages.length);
   }
 
