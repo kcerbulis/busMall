@@ -13,9 +13,9 @@ var numberOfClicks = 0;
 var numberOfGivenClicks = 25;
 var numberOfSelections = 3;
 // Gives images a global reference
-var leftImageSelector = document.getElementById('left_image_id')
-var middleImageSelector = document.getElementById('middle_image_id')
-var rightImageSelector = document.getElementById('right_image_id')
+var leftImageSelector = document.getElementById('left_image_id');
+var middleImageSelector = document.getElementById('middle_image_id');
+var rightImageSelector = document.getElementById('right_image_id');
 var leftImageOnThePage;
 var middleImageOnThePage;
 var rightImageOnThePage;
@@ -62,7 +62,7 @@ var rightProductImage = document.getElementById('right');
 
 
 function handleClickOnAnyImage(event){
-  numberOfClicks++
+  numberOfClicks++;
 
 
 
@@ -113,9 +113,9 @@ function handleClickOnAnyImage(event){
 
 
 // Incrieces the amount of times shown counter by one
-  leftImageOnThePage.shown++
-  middleImageOnThePage.shown++
-  rightImageOnThePage.shown++
+  leftImageOnThePage.shown++;
+  middleImageOnThePage.shown++;
+  rightImageOnThePage.shown++;
 
 
 // Puts the images on the page
@@ -125,10 +125,10 @@ function handleClickOnAnyImage(event){
 
 // Stop after you run out of clicks
   if (numberOfClicks >= numberOfGivenClicks){
-    console.log('The user ran out of clicks')
-    leftProductImage.removeEventListener('click', handleClickOnAnyImage)
-    middleProductImage.removeEventListener('click', handleClickOnAnyImage)
-    rightProductImage.removeEventListener('click', handleClickOnAnyImage)
+    console.log('The user ran out of clicks');
+    leftProductImage.removeEventListener('click', handleClickOnAnyImage);
+    middleProductImage.removeEventListener('click', handleClickOnAnyImage);
+    rightProductImage.removeEventListener('click', handleClickOnAnyImage);
     runTable();
 
 // Save the goat data
@@ -147,20 +147,20 @@ function handleClickOnAnyImage(event){
 
 
 function handleClickOnLeftImage(){
-  console.log('User clicked on the left image')
+  console.log('User clicked on the left image');
   leftImageOnThePage.clicks++;
   handleClickOnAnyImage();
 }
 
 function handleClickOnMiddleImage(){
-  console.log('User clicked on the middle image')
-  middleImageOnThePage.clicks++
+  console.log('User clicked on the middle image');
+  middleImageOnThePage.clicks++;
   handleClickOnAnyImage();
 }
 
 
 function handleClickOnRightImage(){
-  console.log('User clicked on the right image')
+  console.log('User clicked on the right image');
   rightImageOnThePage.clicks++;
   handleClickOnAnyImage();
 }
@@ -184,7 +184,7 @@ rightProductImage.addEventListener('click', handleClickOnRightImage);
 
 if(localStorage.getItem('allImages') === null){
 
-  console.log('Creating new goats')
+  console.log('Creating new goats');
   new Product ('./assets/bag.jpg', 'r2d2 bag');
   new Product ('./assets/banana.jpg', 'banana cutter');
   new Product ('./assets/bathroom.jpg', 'ipad holder');
